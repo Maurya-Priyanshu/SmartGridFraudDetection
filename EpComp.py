@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-nn = pd.read_csv('NN epochs results.csv')
+nn = pd.read_csv('C:\electricity theft detection\SmartGridFraudDetection\NN epochs results.csv')
 nn = nn.set_index('Epochs')
 
 # print(nn)
@@ -17,7 +17,7 @@ nn[['F1 (0)', 'F1 (1)']].plot(ax=axs[1], grid=True,color=['red','green'])
 axs[1].set_title('F1 (0) and F1 (1) ', fontsize=16)
 axs[1].set_xlabel('Number of Epochs')
 
-cnn1 = pd.read_csv('1D-Cnn Epochs Results.csv')
+cnn1 = pd.read_csv('C:\electricity theft detection\SmartGridFraudDetection\1D-Cnn Epochs Results.csv')
 cnn1 = cnn1.set_index('Epochs')
 
 # print(nn)
@@ -33,7 +33,7 @@ cnn1[['F1 (0)', 'F1 (1)']].plot(ax=axs2[1], grid=True,color=['red','green'])
 axs2[1].set_title('F1 (0) and F1 (1) ', fontsize=16)
 axs2[1].set_xlabel('Number of Epochs')
 
-cnn2 = pd.read_csv('2D-CNN Epochs Results.csv')
+cnn2 = pd.read_csv('C:\electricity theft detection\SmartGridFraudDetection\2D-CNN Epochs Results.csv')
 cnn2 = cnn2.set_index('Epochs')
 
 # print(nn)

@@ -11,7 +11,7 @@ data = pd.concat([rawData1, rawData2], ignore_index=True)
 fig, axs = plt.subplots(2, 1)
 fig.suptitle('Consumers With Fraud', fontsize=18)
 plt.subplots_adjust(hspace=0.8)
-
+ 
 data.loc[0].plot(ax=axs[0], color='firebrick', grid=True)
 axs[0].set_title('Consumer 0', fontsize=16)
 axs[0].set_xlabel('Dates of Consumption')

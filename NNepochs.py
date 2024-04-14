@@ -2,10 +2,10 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, mean_absolute_error, mean_squared_error, confusion_matrix, \
     precision_recall_fscore_support, roc_auc_score
-from tensorflow.keras import Sequential
 import tensorflow as tf
+from tensorflow.keras.models import Sequential
 from tensorflow import keras
-from tensorflow.python.keras.layers import Dense, Conv1D, Flatten, Conv2D
+from tensorflow.keras.layers import Dense, Conv1D, Flatten, Conv2D
 import numpy as np
 from imblearn.over_sampling import SMOTE
 
@@ -69,17 +69,18 @@ def ANN(X_train, X_test, y_train, y_test):
     model.add(Dense(100, activation='relu'))
     model.add(Dense(10, activation='relu'))
     model.add(Dense(1, activation='sigmoid'))
+    model.add(Dense(1, activation='softmax'))
 
     model.compile(loss=keras.losses.binary_crossentropy,
                   optimizer='adam',
                   metrics=['accuracy'])
 
-    model.summary()
+    # model.summary()
 
     for i in range(1, 100, 3):
         print("Epoch:", i)
         model.fit(X_train, y_train, validation_split=0, epochs=i, shuffle=True, verbose=0)
-        prediction = model.predict_classes(X_test)
+        prediction = model.predict(X_test)
         results(y_test, prediction)
 
 
@@ -139,17 +140,16 @@ def CNN2D(X_train, X_test, y_train, y_test):
 
     # Model creation
     model = Sequential()
-    model.add(Conv2D(kernel_size=(7, 3), filters=32, input_shape=input_shape[1:], activation='relu',
-                     data_format='channels_last'))
-    model.add(Flatten())
+    model.add(Conv2D(kernel_size=(7, 3), filters=32, input_shape=input_shape[1:], activation='relu'))
+    model.add(Dense(1, activation='sigmoid'))
+
     # model.add(Dense(100, activation='relu'))
     # model.add(Dense(100, activation='relu'))
     # model.add(Dense(64, activation='relu'))
-    model.add(Dense(1, activation='sigmoid'))
+    
 
-    model.compile(loss=keras.losses.binary_crossentropy,
-                  optimizer='adam',
-                  metrics=['accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
     model.summary()
 
     for i in range(1, 100, 3):
@@ -163,6 +163,6 @@ def CNN2D(X_train, X_test, y_train, y_test):
 X_train, X_test, y_train, y_test = read_data()
 
 # Uncomment any model to test
-# ANN(X_train, X_test, y_train, y_test)
+ANN(X_train, X_test, y_train, y_test)
 # CNN1D(X_train, X_test, y_train, y_test)
-CNN2D(X_train, X_test, y_train, y_test)
+# CNN2D(X_train, X_test, y_train, y_test)

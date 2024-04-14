@@ -142,8 +142,8 @@ def CNN2D(X_train, X_test, y_train, y_test):
 
     # Model creation
     model = Sequential()
-    model.add(Conv2D(kernel_size=(7, 3), filters=32, input_shape=input_shape[1:], activation='relu',
-                     data_format='channels_last'))
+    model.add(Conv2D(kernel_size=(7, 3), filters=32, input_shape=input_shape, activation='relu',
+                    data_format='channels_last'))
     model.add(Flatten())
     model.add(Dense(100, activation='relu'))
     model.add(Dense(100, activation='relu'))
@@ -153,13 +153,13 @@ def CNN2D(X_train, X_test, y_train, y_test):
     model.compile(loss=keras.losses.binary_crossentropy,
                   optimizer='adam',
                   metrics=['accuracy'])
-    # model.summary()
+    model.summary()
     #     model.fit(X_train_reshaped, y_train, validation_split=0.1, epochs=i, shuffle=False, verbose=0)
     model.fit(X_train_reshaped, y_train, validation_split=0.1, epochs=epochs_number, shuffle=False, verbose=1)
 
     # prediction = model.predict_classes(X_test)
     prediction = model.predict_classes(X_test_reshaped)
-    model.summary()
+    # model.summary()
     results(y_test, prediction)
 
 
@@ -198,7 +198,7 @@ def RF(X_train, X_test, y_train, y_test):
     print(df[['param_criterion', 'mean_test_score', 'rank_test_score']])
     '''
 
-    model = RandomForestClassifier(n_estimators=100, min_samples_leaf=1, max_features='auto',  # max_depth=10,
+    model = RandomForestClassifier(n_estimators=100, min_samples_leaf=1, max_features=0.5,  # max_depth=10,
                                    random_state=0, n_jobs=-1)
     model.fit(X_train, y_train)
     prediction = model.predict(X_test)
@@ -221,5 +221,5 @@ X_train, X_test, y_train, y_test = read_data()
 # CNN2D(X_train, X_test, y_train, y_test)
 # RF(X_train, X_test, y_train, y_test)
 # LR(X_train, X_test, y_train, y_test)
-# DT(X_train, X_test, y_train, y_test)
+DT(X_train, X_test, y_train, y_test)
 # SVM(X_train, X_test, y_train, y_test)

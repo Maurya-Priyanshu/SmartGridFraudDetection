@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
-rawData = pd.read_csv('data.csv')
+rawData = pd.read_csv("C:\electricity theft detection\SmartGridFraudDetection\data\data.csv")
 infoData = pd.DataFrame()
 infoData['FLAG'] = rawData['FLAG']
 infoData['CONS_NO'] = rawData['CONS_NO']
